@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit import secrets
 import openai
 import os
 import json
@@ -9,12 +10,9 @@ import pandas as pd
 image_path = "image.jpg"
 image = Image.open(image_path)
 #
-#retrive api key from json file
-with open("openai_api_key.json") as f:
-   api_key = json.load(f)
-   #print("Your API key is: ", api_key['API_KEY'])
-#
-openai.api_key = api_key['API_KEY']
+api_key = secrets["API_KEY"]
+openai.api_key = api_key
+print(api_key)
 #
 
 def preprocess_function(text_path,content_type = None ):
