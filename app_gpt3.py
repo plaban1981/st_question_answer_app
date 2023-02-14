@@ -10,12 +10,6 @@ image_path = "image.jpg"
 image = Image.open(image_path)
 #
 
-#retrive api key from json file
-with open("openai_api_key.json") as f:
-   api_key = json.load(f)
-   #print("Your API key is: ", api_key['API_KEY'])
-#
-openai.api_key = api_key['API_KEY']
 
 def preprocess_function(text_path,content_type = None ):
     prompt=f"Generate  Multiple Questions and Answers from the context provided.\n\nContext :{text_path}\n\n"
@@ -24,7 +18,8 @@ def preprocess_function(text_path,content_type = None ):
 # 
 def predict_function(prompt,key): 
     print(prompt)
-    #openai.api_key = key
+    openai.api_key = key
+    print(key)
     response = openai.Completion.create(
                 model="text-davinci-003",
                 prompt=prompt,
@@ -46,7 +41,7 @@ def model_load_function(model_path=None):
     #retrive api key from json file
     with open("openai_api_key.json") as f:
         api_key = json.load(f)
-    #print("Your API key is: ", api_key['API_KEY'])
+    print("Your API key is: ", api_key['API_KEY'])
     #
     key= api_key['API_KEY']
     print("model was loaded")
